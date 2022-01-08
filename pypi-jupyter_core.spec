@@ -4,7 +4,7 @@
 #
 Name     : pypi-jupyter_core
 Version  : 4.9.1
-Release  : 57
+Release  : 58
 URL      : https://files.pythonhosted.org/packages/78/fa/a949d1f0d2aaaef1890c2ab7fee9e58ed7cc6301ebc26c0afbffff4ea6e3/jupyter_core-4.9.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/78/fa/a949d1f0d2aaaef1890c2ab7fee9e58ed7cc6301ebc26c0afbffff4ea6e3/jupyter_core-4.9.1.tar.gz
 Summary  : Jupyter core package. A base package on which Jupyter projects rely.
@@ -15,13 +15,9 @@ Requires: pypi-jupyter_core-license = %{version}-%{release}
 Requires: pypi-jupyter_core-python = %{version}-%{release}
 Requires: pypi-jupyter_core-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
-Provides: jupyter_core
-Provides: jupyter_core-python
-Provides: jupyter_core-python3
-BuildRequires : jupyter_core
+BuildRequires : pypi(jupyter_core)
+BuildRequires : pypi(pytest)
 BuildRequires : pypi(traitlets)
-BuildRequires : pytest
-BuildRequires : traitlets-python
 
 %description
 # Jupyter Core
@@ -75,7 +71,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1641450341
+export SOURCE_DATE_EPOCH=1641667998
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
