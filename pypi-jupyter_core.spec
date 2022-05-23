@@ -4,13 +4,14 @@
 #
 Name     : pypi-jupyter_core
 Version  : 4.10.0
-Release  : 61
+Release  : 62
 URL      : https://files.pythonhosted.org/packages/91/5d/746dd5b904854043f99e72a22c69a2e9b3eb0ade2adc2b288e666ffa816f/jupyter_core-4.10.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/91/5d/746dd5b904854043f99e72a22c69a2e9b3eb0ade2adc2b288e666ffa816f/jupyter_core-4.10.0.tar.gz
 Summary  : Jupyter core package. A base package on which Jupyter projects rely.
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: pypi-jupyter_core-bin = %{version}-%{release}
+Requires: pypi-jupyter_core-license = %{version}-%{release}
 Requires: pypi-jupyter_core-python = %{version}-%{release}
 Requires: pypi-jupyter_core-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
@@ -29,9 +30,18 @@ It doesn't do much on its own.
 %package bin
 Summary: bin components for the pypi-jupyter_core package.
 Group: Binaries
+Requires: pypi-jupyter_core-license = %{version}-%{release}
 
 %description bin
 bin components for the pypi-jupyter_core package.
+
+
+%package license
+Summary: license components for the pypi-jupyter_core package.
+Group: Default
+
+%description license
+license components for the pypi-jupyter_core package.
 
 
 %package python
@@ -58,13 +68,16 @@ python3 components for the pypi-jupyter_core package.
 %prep
 %setup -q -n jupyter_core-4.10.0
 cd %{_builddir}/jupyter_core-4.10.0
+pushd ..
+cp -a jupyter_core-4.10.0 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1650294516
+export SOURCE_DATE_EPOCH=1653340122
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -78,13 +91,33 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 py.test || :
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+python3 setup.py build
+
+popd
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/package-licenses/pypi-jupyter_core
+cp %{_builddir}/jupyter_core-4.10.0/COPYING.md %{buildroot}/usr/share/package-licenses/pypi-jupyter_core/bb68d29f425434557cad5d6bfd7b73fb184e42f2
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+python3 -tt setup.py build install --root=%{buildroot}-v3
+popd
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
@@ -94,6 +127,10 @@ echo ----[ mark ]----
 /usr/bin/jupyter
 /usr/bin/jupyter-migrate
 /usr/bin/jupyter-troubleshoot
+
+%files license
+%defattr(0644,root,root,0755)
+/usr/share/package-licenses/pypi-jupyter_core/bb68d29f425434557cad5d6bfd7b73fb184e42f2
 
 %files python
 %defattr(-,root,root,-)
