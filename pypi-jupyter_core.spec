@@ -4,7 +4,7 @@
 #
 Name     : pypi-jupyter_core
 Version  : 4.10.0
-Release  : 67
+Release  : 68
 URL      : https://files.pythonhosted.org/packages/91/5d/746dd5b904854043f99e72a22c69a2e9b3eb0ade2adc2b288e666ffa816f/jupyter_core-4.10.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/91/5d/746dd5b904854043f99e72a22c69a2e9b3eb0ade2adc2b288e666ffa816f/jupyter_core-4.10.0.tar.gz
 Summary  : Jupyter core package. A base package on which Jupyter projects rely.
