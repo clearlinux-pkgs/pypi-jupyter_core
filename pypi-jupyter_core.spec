@@ -4,7 +4,7 @@
 #
 Name     : pypi-jupyter_core
 Version  : 4.10.0
-Release  : 69
+Release  : 70
 URL      : https://files.pythonhosted.org/packages/91/5d/746dd5b904854043f99e72a22c69a2e9b3eb0ade2adc2b288e666ffa816f/jupyter_core-4.10.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/91/5d/746dd5b904854043f99e72a22c69a2e9b3eb0ade2adc2b288e666ffa816f/jupyter_core-4.10.0.tar.gz
 Summary  : Jupyter core package. A base package on which Jupyter projects rely.
@@ -77,7 +77,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1656397039
+export SOURCE_DATE_EPOCH=1666712449
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -86,11 +86,6 @@ export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
 
-%check
-export http_proxy=http://127.0.0.1:9/
-export https_proxy=http://127.0.0.1:9/
-export no_proxy=localhost,127.0.0.1,0.0.0.0
-py.test || :
 pushd ../buildavx2/
 export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
 export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
@@ -100,11 +95,18 @@ export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
 python3 setup.py build
 
 popd
+%check
+export LANG=C.UTF-8
+export http_proxy=http://127.0.0.1:9/
+export https_proxy=http://127.0.0.1:9/
+export no_proxy=localhost,127.0.0.1,0.0.0.0
+py.test || :
+
 %install
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-jupyter_core
-cp %{_builddir}/jupyter_core-4.10.0/COPYING.md %{buildroot}/usr/share/package-licenses/pypi-jupyter_core/bb68d29f425434557cad5d6bfd7b73fb184e42f2
+cp %{_builddir}/jupyter_core-%{version}/COPYING.md %{buildroot}/usr/share/package-licenses/pypi-jupyter_core/bb68d29f425434557cad5d6bfd7b73fb184e42f2 || :
 python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
