@@ -1,1 +1,2 @@
-py.test || :
+export PYTHONPATH=%{buildroot}}$(python -c "import sys; print(sys.path[-1])")
+pytest || :
