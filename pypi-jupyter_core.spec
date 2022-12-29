@@ -4,7 +4,7 @@
 #
 Name     : pypi-jupyter_core
 Version  : 4.12.0
-Release  : 71
+Release  : 72
 URL      : https://files.pythonhosted.org/packages/8b/d9/0d18cbe8d0d2eb165dd0b42266f0e5e31b1f80c3a48031fbef1077c34521/jupyter_core-4.12.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/8b/d9/0d18cbe8d0d2eb165dd0b42266f0e5e31b1f80c3a48031fbef1077c34521/jupyter_core-4.12.0.tar.gz
 Summary  : Jupyter core package. A base package on which Jupyter projects rely.
@@ -18,6 +18,9 @@ BuildRequires : buildreq-distutils3
 BuildRequires : pypi(hatchling)
 BuildRequires : pypi(traitlets)
 BuildRequires : pypi-pytest
+# Suppress stripping binaries
+%define __strip /bin/true
+%define debug_package %{nil}
 
 %description
 # Jupyter Core
@@ -75,12 +78,12 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1669840664
+export SOURCE_DATE_EPOCH=1672285431
 export GCC_IGNORE_WERROR=1
-export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$FFLAGS -fno-lto "
-export FFLAGS="$FFLAGS -fno-lto "
-export CXXFLAGS="$CXXFLAGS -fno-lto "
+export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export FFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
+export CXXFLAGS="$CXXFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 -m build --wheel --skip-dependency-check --no-isolation
 pushd ../buildavx2/
@@ -105,7 +108,7 @@ pytest || :
 export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/pypi-jupyter_core
-cp %{_builddir}/jupyter_core-%{version}/COPYING.md %{buildroot}/usr/share/package-licenses/pypi-jupyter_core/af74b80434a6429a73d37544e5806c12560d1448
+cp %{_builddir}/jupyter_core-%{version}/COPYING.md %{buildroot}/usr/share/package-licenses/pypi-jupyter_core/af74b80434a6429a73d37544e5806c12560d1448 || :
 pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
