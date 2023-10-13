@@ -5,7 +5,7 @@
 #
 Name     : pypi-jupyter_core
 Version  : 5.3.1
-Release  : 81
+Release  : 82
 URL      : https://files.pythonhosted.org/packages/9e/53/f27bd74ceaa672a1ce17b4b2bee93c0742ca00cb9f540ec4fa60cf7319b5/jupyter_core-5.3.1.tar.gz
 Source0  : https://files.pythonhosted.org/packages/9e/53/f27bd74ceaa672a1ce17b4b2bee93c0742ca00cb9f540ec4fa60cf7319b5/jupyter_core-5.3.1.tar.gz
 Summary  : Jupyter core package. A base package on which Jupyter projects rely.
