@@ -1,2 +1,5 @@
 # This file contains build requirements that get picked up but are
 # undesirable. One entry per line, no whitespace.
+pypi(platformdirs") tblen=11>)
+pypi(platformdirs") tblen=13>)
+pypi(platformdirs") tblen=14>)
