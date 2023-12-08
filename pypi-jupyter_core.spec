@@ -7,7 +7,7 @@
 #
 Name     : pypi-jupyter_core
 Version  : 5.5.0
-Release  : 83
+Release  : 84
 URL      : https://files.pythonhosted.org/packages/5c/3d/c75bda485eaf15cd430383deb0c441aa822679ea88c5b32cfc2013f678e1/jupyter_core-5.5.0.tar.gz
 Source0  : https://files.pythonhosted.org/packages/5c/3d/c75bda485eaf15cd430383deb0c441aa822679ea88c5b32cfc2013f678e1/jupyter_core-5.5.0.tar.gz
 Summary  : Jupyter core package. A base package on which Jupyter projects rely.
@@ -82,7 +82,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1701742813
+export SOURCE_DATE_EPOCH=1702068777
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
