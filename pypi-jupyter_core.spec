@@ -6,10 +6,10 @@
 # autospec commit: c1050fe
 #
 Name     : pypi-jupyter_core
-Version  : 5.6.1
-Release  : 87
-URL      : https://files.pythonhosted.org/packages/86/7e/3ee700dd813796eaad95c4517a3f96c962eabd7ace525ac0c76d659e9957/jupyter_core-5.6.1.tar.gz
-Source0  : https://files.pythonhosted.org/packages/86/7e/3ee700dd813796eaad95c4517a3f96c962eabd7ace525ac0c76d659e9957/jupyter_core-5.6.1.tar.gz
+Version  : 5.7.0
+Release  : 88
+URL      : https://files.pythonhosted.org/packages/0d/3d/b92790008bbaa28ffc6a2cf00f4bfeba9f98880edc859731b08f44e4f351/jupyter_core-5.7.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/0d/3d/b92790008bbaa28ffc6a2cf00f4bfeba9f98880edc859731b08f44e4f351/jupyter_core-5.7.0.tar.gz
 Summary  : Jupyter core package. A base package on which Jupyter projects rely.
 Group    : Development/Tools
 License  : BSD-3-Clause
@@ -71,10 +71,10 @@ python3 components for the pypi-jupyter_core package.
 
 
 %prep
-%setup -q -n jupyter_core-5.6.1
-cd %{_builddir}/jupyter_core-5.6.1
+%setup -q -n jupyter_core-5.7.0
+cd %{_builddir}/jupyter_core-5.7.0
 pushd ..
-cp -a jupyter_core-5.6.1 buildavx2
+cp -a jupyter_core-5.7.0 buildavx2
 popd
 
 %build
@@ -82,7 +82,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1704210354
+export SOURCE_DATE_EPOCH=1704313892
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
