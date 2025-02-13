@@ -7,7 +7,7 @@
 #
 Name     : pypi-jupyter_core
 Version  : 5.7.2
-Release  : 91
+Release  : 92
 URL      : https://files.pythonhosted.org/packages/00/11/b56381fa6c3f4cc5d2cf54a7dbf98ad9aa0b339ef7a601d6053538b079a7/jupyter_core-5.7.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/00/11/b56381fa6c3f4cc5d2cf54a7dbf98ad9aa0b339ef7a601d6053538b079a7/jupyter_core-5.7.2.tar.gz
 Summary  : Jupyter core package. A base package on which Jupyter projects rely.
